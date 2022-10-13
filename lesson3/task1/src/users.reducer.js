@@ -4,7 +4,7 @@ const initialState = {
   usersList: [],
 };
 
-const usersReducer = (state, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER: {
       return {
@@ -40,6 +40,5 @@ const usersReducer = (state, action) => {
       return state;
   }
 };
-
 
 export default usersReducer;
