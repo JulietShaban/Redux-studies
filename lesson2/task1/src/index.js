@@ -1,35 +1,16 @@
-import { createStore } from "redux";
+import store from './store';
+import { increment, decrement, reset } from './counter.actions';
+import { addUser, deleteUser, updateUser } from './users.actions';
 
-const INCREMENT = 'COUNTER/INCREMENT';
-const DECREMENT = 'COUNTER/DECREMENT';
+store.subscribe(() => console.log(store.getState()));
 
-const incrementActionCreator = () => {
-  return {
-    type: INCREMENT,
-  };
-};
-const decrementActionCreator = () => {
-  return { 
-    type: DECREMENT
-  };
-};
+store.dispatch(increment());
+store.dispatch(decrement());
+store.dispatch(increment());
+store.dispatch(increment());
+store.dispatch(reset());
 
-const counterReducer = (state = 0, action) => {
-  switch (action.type) {
-    case INCREMENT:
-      return state + 1;
-    case DECREMENT:
-      return state - 1;
-    default:
-      return state;
-  }
-};
-
-const store = createStore(counterReducer);
-
-store.dispatch(incrementActionCreator);
-store.dispatch(incrementActionCreator);
-store.dispatch(decrementActionCreator);
-
-
-console.log(store.getState());
+store.dispatch(addUser({id: 1, name: 'Tom'}));
+store.dispatch(addUser({id: 2, name: 'Bom'}));
+store.dispatch(deleteUser(1));
+store.dispatch(updateUser(2, { name: 'Ella', age:14}));
